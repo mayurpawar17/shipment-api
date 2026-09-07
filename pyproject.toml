@@ -1,0 +1,20 @@
+[project]
+name = "shipment-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "mayurpawar17", email = "mayurpawar4908@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "scalar-fastapi>=1.9.0",
+]
+
+[project.scripts]
+shipment-api = "shipment_api:main"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"
