@@ -18,7 +18,7 @@ def get_shipments():
     return shipment_data
 
 @app.get("/shipments/{shipment_id}")
-def get_shipment(shipment_id:str) ->dict[str,Any]:
+def get_shipment(shipment_id: int) -> dict[str, Any]:
     for shipment in shipment_data:
         if shipment.shipment_id == shipment_id:
             return shipment
