@@ -12,5 +12,11 @@ class Shipment(BaseShipment):
 class ShipmentResponse(BaseShipment):
     status: str = Field(..., max_length=50, description="Current status of the shipment")
 
-class ShipmentCreate(BaseShipment):
-    status: str = Field(..., max_length=50, description="Current status of the shipment")
+class ShipmentCreate(BaseModel):
+    content: str = Field(..., max_length=100, description="Description of the shipment content")
+    destination: str = Field(..., max_length=100, description="Destination of the shipment")
+
+class ShipmentUpdate(BaseModel):
+    content: str | None = Field(None, max_length=100, description="Description of the shipment content")
+    destination: str | None = Field(None, max_length=100, description="Destination of the shipment")
+    status: str | None = Field(None, max_length=50, description="Current status of the shipment")
