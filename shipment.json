@@ -1,0 +1,20 @@
+[
+  {
+    "shipment_id": 1,
+    "content": "Electronics",
+    "destination": "New York",
+    "status": "In Transit"
+  },
+  {
+    "shipment_id": 2,
+    "content": "Books",
+    "destination": "Chicago",
+    "status": "Delivered"
+  },
+  {
+    "shipment_id": 3,
+    "content": "Clothing",
+    "destination": "Los Angeles",
+    "status": "Pending"
+  }
+]

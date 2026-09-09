@@ -1,9 +1,10 @@
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, status
-from .datbase import shipment_data
-from .schemas import Shipment, ShipmentResponse,ShipmentCreate, ShipmentUpdate
 from scalar_fastapi import get_scalar_api_reference
+
+from .database import shipment_data
+from .schemas import Shipment, ShipmentCreate, ShipmentResponse, ShipmentUpdate
 
 app = FastAPI()
 
