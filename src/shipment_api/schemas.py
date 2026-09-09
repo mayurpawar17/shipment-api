@@ -20,3 +20,10 @@ class ShipmentUpdate(BaseModel):
     content: str | None = Field(None, max_length=100, description="Description of the shipment content")
     destination: str | None = Field(None, max_length=100, description="Destination of the shipment")
     status: str | None = Field(None, max_length=50, description="Current status of the shipment")
+
+
+
+class UserCreate(BaseModel):
+    name: str
+    email: str
+    age: int

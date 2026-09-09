@@ -1,8 +1,8 @@
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, status
-from .datbase import shipment_data
-from .schemas import Shipment, ShipmentResponse,ShipmentCreate, ShipmentUpdate
+from .datbase import shipment_data,get_connection
+from .schemas import Shipment, ShipmentResponse,ShipmentCreate, ShipmentUpdate,UserCreate
 from scalar_fastapi import get_scalar_api_reference
 
 app = FastAPI()
@@ -28,13 +28,21 @@ def get_shipment(shipment_id: int) -> ShipmentResponse:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Shipment not found")
 
 
-@app.post("/shipments", response_model=ShipmentResponse)
-def create_shipment(shipment: ShipmentCreate)->ShipmentResponse:
-    '''create a new shipment'''
-    new_shipment_id = max([s.shipment_id for s in shipment_data], default=0) + 1
-    shipment = Shipment(shipment_id=new_shipment_id,status="Created", **shipment.dict())
-    shipment_data.append(shipment)
-    return ShipmentResponse(**shipment.dict())
+@app.post("/users")
+def create_user(user: UserCreate):
+    '''create a new user'''
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO users (name, email, age) VALUES (%s, %s, %s) RETURNING id, name, email, age",
+        (user.name, user.email, user.age)
+    )
+    user_id = cursor.fetchone()[0]
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return {"id": user_id, "name": user.name, "email": user.email, "age": user.age}
+
 
 @app.put("/shipments/{shipment_id}", response_model=ShipmentResponse)
 def update_shipment(shipment_id: int, updated_shipment: ShipmentUpdate) -> ShipmentResponse:
