@@ -8,8 +8,11 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "alembic>=1.19.2",
     "fastapi[standard]>=0.141.1",
+    "psycopg[binary]>=3.3.5",
     "scalar-fastapi>=1.9.0",
+    "sqlalchemy>=2.0.52",
 ]
 
 [project.scripts]
