@@ -5,17 +5,29 @@
 This project is a small FastAPI application that exposes a user CRUD example.
 The current runtime database is SQLite, stored in `user.db`.
 
+The application is organized by responsibility:
+
+```text
+src/shipment_api/
+├── main.py              # Application entry point and top-level routes
+├── database.py          # SQLAlchemy engine, session factory, and dependency
+├── models.py            # SQLAlchemy ORM models
+├── schemas.py           # Pydantic request and response schemas
+└── routers/
+    └── users.py         # User API endpoints
+```
+
 The project dependencies are managed by `uv` and declared in
 `pyproject.toml`. SQLAlchemy provides database access, Pydantic validates
 request and response data, and Scalar provides interactive API documentation.
 
 ## Application startup workflow
 
-1. FastAPI creates the application object.
-2. SQLAlchemy creates an engine for `sqlite:///user.db`.
-3. A session factory and declarative model base are configured.
-4. The `users` table is created if it does not already exist.
-5. FastAPI registers the route handlers.
+1. `main.py` creates the FastAPI application.
+2. `database.py` creates an engine for `sqlite:///user.db`.
+3. `models.py` registers the `User` table with SQLAlchemy metadata.
+4. `main.py` creates the `users` table if it does not already exist.
+5. `users.py` registers the user route handlers.
 6. Uvicorn starts serving the application.
 
 Run the application from the project root:
