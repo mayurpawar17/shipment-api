@@ -7,7 +7,7 @@ from ..models import User
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Convert validated request data into an ORM object, persist it, and reload
     # it so generated values such as the primary-key ID are available.
@@ -25,7 +25,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return db_user
 
-@router.get("/", response_model=list[UserResponse])
+@router.get("", response_model=list[UserResponse])
 def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     # Pagination prevents this endpoint from loading every user at once.
     return db.query(User).offset(skip).limit(limit).all()   
