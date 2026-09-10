@@ -1,7 +1,7 @@
 import logging
-import os
 from collections.abc import Generator
 
+from dotenv import dotenv_values
 from sqlalchemy import create_engine, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
@@ -10,9 +10,10 @@ from sqlalchemy.orm import Session, sessionmaker
 logger = logging.getLogger(__name__)
 
 
-# Set DATABASE_URL to the supplied Neon connection string before starting API.
-# It is read from the environment so the database password is not committed.
-database_url = os.getenv("DATABASE_UR")
+# Load the database URL from the local .env file.
+database_url = dotenv_values(".env").get("DATABASE_URL")
+# Previous environment-variable approach, preserved for reference:
+# database_url = os.getenv("DATABASE_URL")
 
 if database_url:
     # SQLAlchemy needs +psycopg to select the installed Psycopg 3 driver.
