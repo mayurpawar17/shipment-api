@@ -1,8 +1,13 @@
+import logging
+
 from fastapi import FastAPI
 from .database import engine, Base
 from scalar_fastapi import get_scalar_api_reference
 from .routers.users import router as user_router
 
+
+# Show application INFO logs, including the database connection message.
+logging.basicConfig(level=logging.INFO)
 
 # FastAPI creates the HTTP application and generates its OpenAPI documentation.
 app = FastAPI(title="FastAPI with SQLAlchemy + Pydantic + Postgresql")
