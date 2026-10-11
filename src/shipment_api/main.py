@@ -33,6 +33,14 @@ def get_latest_shipment() -> dict[str, Any]:
     return shipments_db[id]
 
 @app.get("/shipments/{shipment_id}")
-def get_shipments(shipment_id: int) -> dict[str, Any]:
-    return shipments_db.get(shipment_id, {"error": "Shipment not found"})
+def get_shipment_by_path_parameter(shipment_id: int) -> dict[str, Any]:
+    if shipment_id not in shipments_db:
+        return {"error": "Shipment not found"}
+    return shipments_db[shipment_id]
+
+@app.get("/shipments")
+def get_shipment_by_query_parameter(shipment_id: int) -> dict[str, Any]:
+    if shipment_id not in shipments_db:
+        return {"error": "Shipment not found"}
+    return shipments_db[shipment_id]
 
