@@ -32,6 +32,13 @@ def get_latest_shipment() -> dict[str, Any]:
     id=max(shipments_db.keys());
     return shipments_db[id]
 
+@app.post("/shipments")
+def create_shipment_with_request_body( data: dict[str, Any]) -> dict[str, Any]:
+    '''Create a new shipment with POST Method and Request Body.'''
+    new_shipment_id=max(shipments_db.keys()) + 1;
+    shipments_db[new_shipment_id] = {"content": data["content"], "status": "pending"}
+    return shipments_db[new_shipment_id]
+
 @app.get("/shipments/{shipment_id}")
 def get_shipment_by_path_parameter(shipment_id: int) -> dict[str, Any]:
     if shipment_id not in shipments_db:
@@ -46,6 +53,7 @@ def get_shipment_by_query_parameter(shipment_id: int) -> dict[str, Any]:
 
 @app.post("/shipments")
 def create_shipment( content: str) -> dict[str, Any]:
+    '''Create a new shipment with POST Method and Query Parameter.'''
     new_shipment_id=max(shipments_db.keys()) + 1;
     shipments_db[new_shipment_id] = {"content": content, "status": "pending"}
     return shipments_db[new_shipment_id]
