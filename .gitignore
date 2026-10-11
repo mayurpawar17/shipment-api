@@ -1,0 +1,127 @@
+```gitignore
+# ============================================
+# Python
+# ============================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Type checking / linting caches
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# ============================================
+# Virtual Environment
+# ============================================
+
+.venv/
+venv/
+env/
+ENV/
+
+# ============================================
+# uv
+# ============================================
+
+# Keep uv.lock committed for application/backend projects.
+# Do NOT ignore uv.lock.
+
+# ============================================
+# Environment / Secrets
+# ============================================
+
+.env
+.env.*
+!.env.example
+
+# ============================================
+# PyCharm
+# ============================================
+
+.idea/
+
+# ============================================
+# VS Code
+# ============================================
+
+.vscode/
+
+# ============================================
+# OS Generated Files
+# ============================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ============================================
+# Logs
+# ============================================
+
+*.log
+logs/
+
+# ============================================
+# Temporary Files
+# ============================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ============================================
+# Local Database
+# ============================================
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+
+# ============================================
+# FastAPI / Local Development
+# ============================================
+
+# Local uploads
+uploads/
+
+# Generated files
+generated/
+
+# ============================================
+# Docker
+# ============================================
+
+# Docker override files
+docker-compose.override.yml
+
+# ============================================
+# IDE / Editor Files
+# ============================================
+
+*.iml
+```
