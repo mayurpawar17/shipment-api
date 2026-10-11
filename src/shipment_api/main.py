@@ -20,7 +20,13 @@ def health_check():
 def get_scalar():
     return get_scalar_api_reference(openapi_url=app.openapi_url, title="Shipment API")
 
-
+@app.get("/shipments/latest")
+def get_latest_shipment():
+    return {
+        "shipment_id": 12345,
+        "content": "Books",
+        "status": "delivered",
+    }
 
 @app.get("/shipments/{shipment_id}")
 def get_shipments(shipment_id: int):
@@ -29,3 +35,4 @@ def get_shipments(shipment_id: int):
         "status": "in_transit",
         "content": "Electronics",
     }
+
