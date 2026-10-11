@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import FastAPI, HTTPException,status
+from fastapi import FastAPI, HTTPException, status
 from scalar_fastapi import get_scalar_api_reference
 
 app = FastAPI(
@@ -44,3 +44,8 @@ def get_shipment_by_query_parameter(shipment_id: int) -> dict[str, Any]:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Shipment not found")
     return shipments_db[shipment_id]
 
+@app.post("/shipments")
+def create_shipment( content: str) -> dict[str, Any]:
+    new_shipment_id=max(shipments_db.keys()) + 1;
+    shipments_db[new_shipment_id] = {"content": content, "status": "pending"}
+    return shipments_db[new_shipment_id]
