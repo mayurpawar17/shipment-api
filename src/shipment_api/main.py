@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from scalar_fastapi import get_scalar_api_reference
 
 app = FastAPI(
@@ -35,12 +35,12 @@ def get_latest_shipment() -> dict[str, Any]:
 @app.get("/shipments/{shipment_id}")
 def get_shipment_by_path_parameter(shipment_id: int) -> dict[str, Any]:
     if shipment_id not in shipments_db:
-        return {"error": "Shipment not found"}
+        raise HTTPException(status_code=404, detail="Shipment not found")
     return shipments_db[shipment_id]
 
 @app.get("/shipments")
 def get_shipment_by_query_parameter(shipment_id: int) -> dict[str, Any]:
     if shipment_id not in shipments_db:
-        return {"error": "Shipment not found"}
+        raise HTTPException(status_code=404, detail="Shipment not found")
     return shipments_db[shipment_id]
 
